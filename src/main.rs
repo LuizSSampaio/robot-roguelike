@@ -1,8 +1,10 @@
 use bevy::{input::common_conditions::input_toggle_active, prelude::*};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use enemy::EnemyPlugin;
 use player::PlayerPlugin;
 use world::WorldPlugin;
 
+mod enemy;
 mod player;
 mod world;
 
@@ -12,7 +14,7 @@ fn main() {
         .add_plugins(
             WorldInspectorPlugin::default().run_if(input_toggle_active(true, KeyCode::AltRight)),
         )
-        .add_plugins((WorldPlugin, PlayerPlugin))
+        .add_plugins((WorldPlugin, PlayerPlugin, EnemyPlugin))
         .add_systems(Startup, spawn_camera)
         .run();
 }
